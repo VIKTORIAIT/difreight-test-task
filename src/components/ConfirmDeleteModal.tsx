@@ -1,44 +1,42 @@
 import React from "react";
-
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 interface ConfirmDeleteModalProps {
-  onClose: () => void;
-  onDelete: () => void;
+	onClose: () => void;
+	onDelete: () => void;
 }
 
-const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ onClose, onDelete }) => {
-  return (
-    <div
-      className="modal fade"
-      aria-labelledby="confirmDeleteModalLabel"
-      aria-hidden="true"
-      style={{ display: "block", opacity: 1 }}
-    >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h1 className="modal-title fs-5" id="confirmDeleteModalLabel">
-              Підтвердіть видалення
-            </h1>
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={onClose}
-            ></button>
-          </div>
-          <div className="modal-body">Ви впевнені, що хочете видалити цю задачу?</div>
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" onClick={onClose}>
-              Close
-            </button>
-            <button type="button" className="btn btn-danger" onClick={onDelete}>
-              Delete
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({
+	onClose,
+	onDelete,
+}) => {
+	return (
+		<Modal
+			show={true}
+			onHide={onClose}
+			backdrop="static"
+			keyboard={false}
+			size="lg"
+			centered
+		>
+			<Modal.Header closeButton>
+				<Modal.Title id="contained-modal-title-vcenter">
+					Підтвердіть видалення
+				</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+				<p>Ви впевнені, що хочете видалити цю задачу?</p>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button variant="secondary" onClick={onClose}>
+					Відмінити
+				</Button>
+				<Button variant="danger" onClick={onDelete}>
+					Підтверджую видалення
+				</Button>
+			</Modal.Footer>
+		</Modal>
+	);
 };
 
 export default ConfirmDeleteModal;
